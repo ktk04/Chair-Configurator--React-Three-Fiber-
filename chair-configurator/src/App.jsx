@@ -9,6 +9,7 @@ function App() {
     <div className="App">
      <Canvas>
       <color attach="background" args={["#213547"]}/>
+      <fog attach="fog" args={['#101010', 10, 20]} />
         <Experience/>
      </Canvas>
     </div>

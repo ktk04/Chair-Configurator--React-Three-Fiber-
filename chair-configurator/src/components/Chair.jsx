@@ -12,20 +12,49 @@ const Chair = (props) => {
     roughnessMap: './textures/leather/Leather_008_Roughness.jpg',
     aoMap: './textures/leather/Leather_008_Ambient Occlusion.jpg',
   })
-
-  leatherTextureProps.map.repeat.set(2,2);
-  leatherTextureProps.normalMap.repeat.set(2,2);
-  leatherTextureProps.roughnessMap.repeat.set(2,2);
-  leatherTextureProps.aoMap.repeat.set(2,2);
-
-  leatherTextureProps.map.wrapS=leatherTextureProps.map.wrapT=THREE.RepeatWrapping;
   
+  const fabricTextureProps = useTexture({
+    normalMap: "./textures/fabric/Fabric_Knitted_006_normal.jpg",
+    roughnessMap: "./textures/fabric/Fabric_Knitted_006_roughness.jpg",
+    aoMap: "./textures/fabric/Fabric_Knitted_006_ambientOcclusion.jpg",
+  });
+
+  // leatherTextureProps.map.repeat.set(3, 3);
+  leatherTextureProps.normalMap.repeat.set(3, 3);
+  leatherTextureProps.roughnessMap.repeat.set(3, 3);
+  leatherTextureProps.aoMap.repeat.set(3, 3);
+  // leatherTextureProps.map.wrapS = leatherTextureProps.map.wrapT =
+  //   THREE.MirroredRepeatWrapping;
+  leatherTextureProps.normalMap.wrapS = leatherTextureProps.normalMap.wrapT =
+    THREE.MirroredRepeatWrapping;
+  leatherTextureProps.roughnessMap.wrapS =
+    leatherTextureProps.roughnessMap.wrapT = THREE.MirroredRepeatWrapping;
+  leatherTextureProps.aoMap.wrapS = leatherTextureProps.aoMap.wrapT =
+    THREE.RepeatWrapping;
+
+  // fabricTextureProps.map.repeat.set(3, 3);
+  fabricTextureProps.normalMap.repeat.set(3, 3);
+  fabricTextureProps.roughnessMap.repeat.set(3, 3);
+  fabricTextureProps.aoMap.repeat.set(3, 3);
+  // fabricTextureProps.map.wrapS = fabricTextureProps.map.wrapT =
+  //   THREE.RepeatWrapping;
+  fabricTextureProps.normalMap.wrapS = fabricTextureProps.normalMap.wrapT =
+    THREE.RepeatWrapping;
+  fabricTextureProps.roughnessMap.wrapS =
+    fabricTextureProps.roughnessMap.wrapT = THREE.RepeatWrapping;
+  fabricTextureProps.aoMap.wrapS = fabricTextureProps.aoMap.wrapT =
+    THREE.RepeatWrapping;
+
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Chair.geometry} material={materials.Chair}>
         <meshStandardMaterial {...leatherTextureProps}/>
       </mesh>
-      <mesh geometry={nodes.Cushion.geometry} material={materials.Cushion} position={[0, 0.06, 0.04]} />
+      <mesh geometry={nodes.Cushion.geometry} material={materials.Cushion} position={[0, 0.06, 0.04]} >
+      <meshStandardMaterial
+          {...fabricTextureProps}
+        />
+      </mesh>
       <mesh geometry={nodes.Legs1.geometry} material={materials.Legs} />
       <mesh geometry={nodes.Legs2.geometry} material={materials.Legs} visible={false} />
     </group>
